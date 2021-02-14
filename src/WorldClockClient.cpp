@@ -90,11 +90,9 @@ void WorldClockClient::updateTime() {
   int pos = 0;
   boolean isBody = false;
   char c;
-
-  int size = 0;
   client.setNoDelay(false);
-  while(client.available() || client.connected()) {
-    while((size = client.available()) > 0) {
+  while (client.connected() || client.available()) {
+    if (client.available()) {
       c = client.read();
       if (c == '{' || c == '[') {
         isBody = true;
@@ -103,7 +101,10 @@ void WorldClockClient::updateTime() {
         parser.parse(c);
       }
     }
+    // give WiFi and TCP/IP libraries a chance to handle pending events
+    yield();
   }
+  client.stop();
 }
 
 
