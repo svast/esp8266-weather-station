@@ -72,7 +72,7 @@ const double LUNAR_CYCLE_DAYS = 29.530588853;
  *          to be in UTC. Unfortunately it is missing in ESP8266 Arduino-core,
  *          see https://github.com/esp8266/Arduino/issues/4820
  *
- * Source: http://www.thebackshed.com/forum/forum_posts.asp?TID=10023&PN=12
+ * Source: https://www.thebackshed.com/forum/ViewTopic.php?TID=10023#111791
  *
  */
 #define EPOCH_YR 1970            /* EPOCH = Jan 1 1970 00:00:00 */
@@ -231,7 +231,7 @@ SunMoonCalc::Result SunMoonCalc::calculateSunAndMoonData(){
   out = getMoonDiskOrientationAngles(lst, sunRA, sunDec, radians(moonLon),radians(moonLat), moonRA, moonDec);
   moon.axisPositionAngle = out[2];
   moon.brightLimbAngle = out[3];
-  moon.paralacticAngle = out[4];
+  moon.parallacticAngle = out[4];
   delete[] out;
   moon.age = ma;
   moon.phase = calculateMoonPhase(moon.age);

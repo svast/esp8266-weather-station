@@ -34,6 +34,11 @@ uint8_t OpenWeatherMapForecast::updateForecasts(OpenWeatherMapForecastData *data
   return doUpdate(data, buildPath(appId, "q=" + location));
 }
 
+uint8_t OpenWeatherMapForecast::updateForecasts(OpenWeatherMapForecastData *data, String appId, float lat, float lon, uint8_t maxForecasts) {
+  this->maxForecasts = maxForecasts;
+  return doUpdate(data, buildPath(appId, "lat=" + String(lat) + "&lon=" + String(lon)));
+}
+
 uint8_t OpenWeatherMapForecast::updateForecastsById(OpenWeatherMapForecastData *data, String appId, String locationId, uint8_t maxForecasts) {
   this->maxForecasts = maxForecasts;
   return doUpdate(data, buildPath(appId, "id=" + locationId));
@@ -55,7 +60,11 @@ uint8_t OpenWeatherMapForecast::doUpdate(OpenWeatherMapForecastData *data, Strin
   Serial.printf("[HTTP] Requesting resource at http://%s:%u%s\n", host.c_str(), port, path.c_str());
 
   WiFiClient client;
-  if(client.connect(host, port)) {
+  #if defined(ESP8266)
+  if (client.connect(host, port)) {
+  #else
+  if (client.connect(host.c_str(), port)) {
+  #endif
     bool isBody = false;
     char c;
     Serial.println("[HTTP] connected, now GETting data");

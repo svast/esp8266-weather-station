@@ -32,6 +32,9 @@ OpenWeatherMapCurrent::OpenWeatherMapCurrent() {
 void OpenWeatherMapCurrent::updateCurrent(OpenWeatherMapCurrentData *data, String appId, String location) {
   doUpdate(data, buildPath(appId, "q=" + location));
 }
+void OpenWeatherMapCurrent::updateCurrent(OpenWeatherMapCurrentData *data, String appId, float lat, float lon) {
+  doUpdate(data, buildPath(appId, "lat=" + String(lat) + "&lon=" + String(lon)));
+}
 
 void OpenWeatherMapCurrent::updateCurrentById(OpenWeatherMapCurrentData *data, String appId, String locationId) {
   doUpdate(data, buildPath(appId, "id=" + locationId));
@@ -52,7 +55,11 @@ void OpenWeatherMapCurrent::doUpdate(OpenWeatherMapCurrentData *data, String pat
   Serial.printf("[HTTP] Requesting resource at http://%s:%u%s\n", host.c_str(), port, path.c_str());
 
   WiFiClient client;
-  if(client.connect(host, port)) {
+  #if defined(ESP8266)
+  if (client.connect(host, port)) {
+  #else
+  if (client.connect(host.c_str(), port)) {
+  #endif
     bool isBody = false;
     char c;
     Serial.println("[HTTP] connected, now GETting data");
@@ -132,6 +139,10 @@ void OpenWeatherMapCurrent::value(String value) {
   // "temp": 290.56, float temp;
   if (currentKey == "temp") {
     this->data->temp = value.toFloat();
+  }
+  // "feels_like": 290.87, float feelsLike;
+  if (currentKey == "feels_like") {
+    this->data->feelsLike = value.toFloat();
   }
   // "pressure": 1013, uint16_t pressure;
   if (currentKey == "pressure") {

@@ -1,7 +1,7 @@
 # ThingPulse ESP8266 Weather Station
 
-
-[![ThingPulse logo](https://thingpulse.com/assets/ThingPulse-w300.svg)](https://thingpulse.com)
+[![PlatformIO Registry](https://badges.registry.platformio.org/packages/thingpulse/library/ESP8266%20Weather%20Station.svg)](https://registry.platformio.org/libraries/thingpulse/ESP8266%20Weather%20Station)
+[![PlatformIO CI](https://github.com/ThingPulse/esp8266-weather-station/actions/workflows/main.yml/badge.svg)](https://github.com/ThingPulse/esp8266-weather-station/actions)
 
 
 This code works best with the NodeMCU V2 ESP8266 module and an 0.96" OLED display.
@@ -11,13 +11,6 @@ To get you up and running in no time we created a kit which contains all the nec
 By buying this and [other kits](https://thingpulse.com/shop/) from us you are funding maintenance and  development of this library. Thank you!
 
 [![ThingPulse ESP8266 WeatherStation Classic Kit](resources/ThingPulse-ESP8266-Weather-Station.jpeg)](https://thingpulse.com/product/esp8266-iot-electronics-starter-kit-weatherstation-planespotter-worldclock/)
-
-### Build Status
-
-| Branch  | Status |
-| ------------- | ------------- |
-| master  | [![Build Status](https://travis-ci.org/ThingPulse/esp8266-weather-station.svg?branch=master)](https://travis-ci.org/ThingPulse/esp8266-weather-station)  |
-| development  | [![Build Status](https://travis-ci.org/ThingPulse/esp8266-weather-station.svg?branch=development)](https://travis-ci.org/ThingPulse/esp8266-weather-station)  |
 
 ## Service level promise
 
@@ -85,4 +78,5 @@ The ESP8266 OLED Library changed a lot with the latest release of version 3.0.0.
 
 | Announcement  | Module  | Removal  |
 |---------------|---------|----------|
+| 2024-09-19    | OWM requests by city name and city ID, see [their documentation](https://openweathermap.org/current#builtin)  |   |
 | 2018-06-13    | all **Wunderground** related code, see [our blog](https://thingpulse.com/hello-openweathermap-bye-bye-wunderground/) for details  | January 2020, version 2.0.0  |
